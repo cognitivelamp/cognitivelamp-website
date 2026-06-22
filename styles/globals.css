@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Accessibility & Reading Comfort ─────────────────────── */
+:root {
+  --reading-width: 70ch;
+  --line-height-body: 1.85;
+  --letter-spacing-body: 0.01em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Atkinson Hyperlegible', sans-serif;
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  color: #1f2937;
+  background-color: #fafafa;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus ring for keyboard users */
+*:focus-visible {
+  outline: 3px solid #4f46e5;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Dyslexia-friendly reading mode toggle */
+.dyslexia-mode {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+  word-spacing: 0.2em;
+  letter-spacing: 0.05em;
+  line-height: 2;
+}
+
+/* Smooth paragraph spacing */
+p {
+  margin-bottom: 1.2em;
+}
+
+/* Print styles */
+@media print {
+  nav, footer, .no-print { display: none !important; }
+  body { font-size: 12pt; color: #000; background: #fff; }
+  h1, h2, h3 { page-break-after: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  .page-break { page-break-before: always; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
