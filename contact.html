@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; media-src 'self' https:; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com https://embed.tawk.to https://*.tawk.to https://unpkg.com; connect-src 'self' https://www.googletagmanager.com https://region1.google-analytics.com https://www.google-analytics.com https://embed.tawk.to https://*.tawk.to wss://*.tawk.to https://va.tawk.to https://api.github.com https://cusdis.com; frame-src 'self' https://*.tawk.to https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com/maps https://challenges.cloudflare.com https://cusdis.com; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
+    <title>Contact Us | LEADS Higher Secondary School</title>
+    <link rel="icon" type="image/jpeg" href="school-logo.jpg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#1E3A8A">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+
+        /* Custom Mobile Menu Fix */
+        @media (max-width: 1023px) {
+            #mobile-menu.active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid #f1f5f9;
+                z-index: 100;
+            }
+        }
+
+        /* Mandatory Asterisk Styling */
+        .required-star { color: #059669; margin-left: 4px; font-weight: 900; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <div class="bg-emerald-700 text-white py-2 text-xs md:text-sm">
+        <div class="container mx-auto flex justify-between px-4">
+            
+            <div class="flex space-x-4">
+                <a id="global-link-phone-1" href="#" class="hover:text-emerald-200 transition-colors flex items-center cursor-pointer">
+                    <i class="fas fa-phone mr-1"></i> <span id="global-phone-1"></span>
+                </a>
+                <a id="global-link-email-general" href="#" class="hidden sm:flex items-center hover:text-emerald-200 transition-colors cursor-pointer">
+                    <i class="fas fa-envelope mr-1"></i> <span id="global-email-general"></span>
+                </a>
+            </div>
+            
+            <a id="global-link-maps" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-200 transition-colors flex items-center cursor-pointer">
+                <i class="fas fa-map-marker-alt mr-1"></i> <span id="global-address-street"></span>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50 min-h-[90px] md:min-h-[110px] flex items-center">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center w-full relative">
+            
+            <a href="index.html" class="flex items-center gap-3 md:gap-4 group shrink min-w-0">
+                <img src="school-logo.jpg" alt="LEADS Logo" class="h-16 md:h-20 w-auto object-contain flex-shrink-0 transition-transform group-hover:scale-105 duration-300"> 
+                
+                <div class="flex flex-col justify-center border-l-2 border-gray-100 pl-3 md:pl-4 min-w-0">
+                    <span id="global-school-shortname" class="block text-xl md:text-3xl font-black text-blue-900 leading-none uppercase tracking-tighter truncate">LEADS</span>
+                    <span class="text-[9px] md:text-sm font-bold text-emerald-600 tracking-wider md:tracking-[0.15em] uppercase mt-1 truncate">Higher Secondary School</span>
+                </div>
+            </a>
+
+            <ul id="mobile-menu" class="hidden lg:flex items-center space-x-8 font-extrabold text-gray-600 text-[13px] uppercase">
+                <li><a href="index.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Home</a></li>
+                <li><a href="faculty.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Faculty</a></li>
+                <li><a id="global-link-admissions-nav" data-feature="admissions" href="admissions.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Admissions</a></li>
+                <li><a href="insights.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Insights</a></li>
+                <li><a href="gallery.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Gallery</a></li>
+                <li><a href="downloads.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Downloads</a></li>
+                <li><a href="career.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Career</a></li>
+                <li><a href="contact.html" class="nav-link py-2 text-emerald-600 lg:underline lg:decoration-2 lg:underline-offset-8 transition-all">Contact</a></li>
+                <li><a href="about.html" class="nav-link py-2 hover:text-emerald-600 transition-all">About Us</a></li>
+                <li class="mt-2 lg:mt-0">
+                    <a id="global-payment-regular" data-feature="online-payments" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-full hover:bg-blue-900 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        <i class="fas fa-credit-card text-sm"></i>
+                        <span>Pay Fees</span>
+                    </a>
+                </li>
+            </ul>
+
+            <button id="menu-btn" class="lg:hidden text-blue-900 focus:outline-none p-2 flex-shrink-0 relative z-[70]">
+                <i class="fas fa-bars text-3xl" id="menu-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="bg-blue-900 py-16 text-center text-white relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tight">Get In <span class="text-emerald-400">Touch</span></h1>
+            <p class="mt-4 text-gray-300 font-medium">Have questions? We are here to help you.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-16 px-4">
+        <div class="grid lg:grid-cols-2 gap-12">
+            
+            <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100">
+                <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" data-feature="contact-form" onsubmit="return validateContactForm()">
+                    <input type="hidden" name="access_key" value="0b9ccc7b-410a-414c-b0f8-70b8c343bee3">
+                    <input type="hidden" name="from_name" value="LEADS School Website">
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-bold text-blue-900 uppercase mb-2">
+                                Full Name<span class="required-star">*</span>
+                            </label>
+                            <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition" placeholder="Enter your full name">
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-blue-900 uppercase mb-2">
+                                    Email Address<span class="required-star">*</span>
+                                </label>
+                                <input type="email" name="email" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Please enter a valid email address" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition" placeholder="email@example.com">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-blue-900 uppercase mb-2">
+                                    Phone Number<span class="required-star">*</span>
+                                </label>
+                                <input type="tel" name="phone" required pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" title="Please enter a valid 10-digit phone number" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition" placeholder="10-digit mobile number">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-blue-900 uppercase mb-2">
+                                Subject<span class="required-star">*</span>
+                            </label>
+                            <div class="relative">
+                                <select name="subject" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition appearance-none bg-white">
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="Admission Inquiry">Admission Inquiry</option>
+                                    <option value="Job Application">Job Application</option>
+                                    <option value="General Information">General Information</option>
+                                    <option value="Sales and Vendors">Sales and Information</option>
+                                    <option value="Feedback/Complaints">Feedback / Complaints</option>
+                                    <option value="Other">Other Query</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                                    <i class="fas fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-blue-900 uppercase mb-2">
+                                Message<span class="required-star">*</span>
+                            </label>
+                            <textarea name="message" rows="5" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition" placeholder="How can we help you?"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-blue-900 hover:bg-emerald-600 text-white font-black py-4 rounded-xl shadow-lg transition-all uppercase tracking-widest text-sm flex justify-center items-center gap-2">
+                            <span>Send Message</span> <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="space-y-8 flex flex-col h-full">
+                <div class="bg-emerald-600 p-8 md:p-10 rounded-3xl text-white shadow-xl relative overflow-hidden">
+                    <i class="fas fa-school absolute -bottom-4 -right-4 text-9xl text-emerald-500/30"></i>
+                    
+                    <h3 class="text-2xl font-black mb-8 uppercase relative z-10">Visit Our Campus</h3>
+                    <div class="space-y-6 relative z-10 font-medium text-emerald-50">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-emerald-500/50 p-3 rounded-lg"><i class="fas fa-map-marker-alt text-xl text-white"></i></div>
+                            <span class="pt-1">
+                                <span class="font-bold block text-white text-lg">LEADS Higher Secondary School</span>
+                                <span id="contact-card-street"></span>, <br>
+                                <span id="contact-card-city"></span>
+                            </span>
+                        </div>
+                        <a id="contact-card-phone-link" href="#" class="flex items-center gap-4 hover:text-white transition-colors group">
+                            <div class="bg-emerald-500/50 p-3 rounded-lg group-hover:bg-emerald-500 transition-colors"><i class="fas fa-phone text-xl text-white"></i></div>
+                            <span id="contact-card-phone" class="pt-1 text-lg"></span>
+                        </a>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-emerald-500/50 p-3 rounded-lg"><i class="fas fa-clock text-xl text-white"></i></div>
+                            <span class="pt-1 text-lg"><span id="global-working-days"></span>: <span id="global-working-hours"></span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 flex-grow relative bg-gray-200 min-h-[350px]">
+                    <iframe id="global-map-iframe" class="absolute inset-0 w-full h-full" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 pt-16 pb-8 border-t border-gray-200">
+        <div class="container mx-auto px-4 grid md:grid-cols-4 gap-12 text-sm text-gray-600">
+            <div class="col-span-1 md:col-span-2">
+                <h4 class="text-xl font-black text-blue-900 mb-6 uppercase"><span id="global-school-shortname-footer">LEADS</span> <span class="text-emerald-600">SCHOOL</span></h4>
+                <p class="mb-4"><span id="global-address-street-footer"></span>, <span id="global-address-city"></span></p>
+                <p id="global-tagline" class="italic text-xs"></p>
+                
+                <div class="mt-6 space-y-3 font-medium">
+                    <a id="global-link-phone-footer" href="#" class="flex items-center gap-3 hover:text-emerald-600 transition-colors w-fit">
+                        <i class="fas fa-phone text-emerald-600"></i> <span id="global-phone-1-footer"></span>
+                    </a>
+                    <a id="global-link-email-footer" href="#" class="flex items-center gap-3 hover:text-emerald-600 transition-colors w-fit">
+                        <i class="fas fa-envelope text-emerald-600"></i> <span id="global-email-general-footer"></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h5 class="font-bold text-blue-900 mb-6 uppercase text-xs tracking-widest">Navigation</h5>
+                <ul class="space-y-3">
+                    <li><a id="global-link-admissions-footer" data-feature="admissions" href="admissions.html" class="hover:text-emerald-600 transition">Admissions</a></li>
+                    <li><a href="insights.html" class="hover:text-emerald-600 transition">Insights</a></li>
+                    <li><a href="downloads.html" class="hover:text-emerald-600 transition">Downloads</a></li>
+                    <li><a href="career.html" class="hover:text-emerald-600 transition">Career</a></li>
+                    <li><a href="about.html" class="hover:text-emerald-600 transition">About Us</a></li>
+                    <li><a href="terms.html" class="hover:text-emerald-600 transition font-bold">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="font-bold text-blue-900 mb-6 uppercase text-xs tracking-widest">Connect</h5>
+                <div class="flex space-x-4 text-xl">
+                    <a id="global-link-fb" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600"><i class="fab fa-facebook"></i></a>
+                    <a id="global-link-ig" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600"><i class="fab fa-instagram"></i></a>
+                    <a id="global-link-yt" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-16 pt-8 border-t border-gray-200 text-gray-400 text-xs">
+            <p id="global-copyright"></p>
+            <div class="mt-2">
+                <a href="terms.html" class="hover:text-emerald-600 transition underline decoration-dotted">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+
+    <script>
+        // --- Basic HTML5 Form Validation Trigger ---
+        function validateContactForm() {
+            const form = document.getElementById('contact-form');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    isValid = false;
+                }
+            });
+            
+            return isValid; // If valid, web3forms takes over automatically
+        }
+
+    </script>
+    <script src="js/pwa.js"></script>
+</body>
+</html>

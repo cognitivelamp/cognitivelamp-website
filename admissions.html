@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; media-src 'self' https:; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com https://embed.tawk.to https://*.tawk.to https://unpkg.com; connect-src 'self' https://www.googletagmanager.com https://region1.google-analytics.com https://www.google-analytics.com https://embed.tawk.to https://*.tawk.to wss://*.tawk.to https://va.tawk.to https://api.github.com https://cusdis.com; frame-src 'self' https://*.tawk.to https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com/maps https://challenges.cloudflare.com https://cusdis.com; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
+    <title>Admission Portal | LEADS Higher Secondary School</title>
+    <link rel="icon" type="image/jpeg" href="school-logo.jpg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#1E3A8A">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+
+        /* Custom Mobile Menu Fix */
+        @media (max-width: 1023px) {
+            #mobile-menu.active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid #f1f5f9;
+                z-index: 100;
+            }
+        }
+
+        /* Form specific styles */
+        .step-indicator { transition: all 0.3s ease; }
+        .step-active { background-color: #059669; color: white; border-color: #059669; }
+        .step-inactive { background-color: white; color: #9ca3af; border-color: #e5e7eb; }
+        .step-completed { background-color: #d1fae5; color: #059669; border-color: #059669; }
+        .form-section { display: none; animation: fadeIn 0.5s; }
+        .form-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <div class="bg-emerald-700 text-white py-2 text-xs md:text-sm">
+        <div class="container mx-auto flex justify-between px-4">
+            
+            <div class="flex space-x-4">
+                <a id="global-link-phone-1" href="#" class="hover:text-emerald-200 transition-colors flex items-center cursor-pointer">
+                    <i class="fas fa-phone mr-1"></i> <span id="global-phone-1"></span>
+                </a>
+                <a id="global-link-email-general" href="#" class="hidden sm:flex items-center hover:text-emerald-200 transition-colors cursor-pointer">
+                    <i class="fas fa-envelope mr-1"></i> <span id="global-email-general"></span>
+                </a>
+            </div>
+            
+            <a id="global-link-maps" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-200 transition-colors flex items-center cursor-pointer">
+                <i class="fas fa-map-marker-alt mr-1"></i> <span id="global-address-street"></span>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50 min-h-[90px] md:min-h-[110px] flex items-center">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center w-full relative">
+            
+            <a href="index.html" class="flex items-center gap-3 md:gap-4 group shrink min-w-0">
+                <img src="school-logo.jpg" alt="LEADS Logo" class="h-16 md:h-20 w-auto object-contain flex-shrink-0 transition-transform group-hover:scale-105 duration-300"> 
+                
+                <div class="flex flex-col justify-center border-l-2 border-gray-100 pl-3 md:pl-4 min-w-0">
+                    <span id="global-school-shortname" class="block text-xl md:text-3xl font-black text-blue-900 leading-none uppercase tracking-tighter truncate">LEADS</span>
+                    <span class="text-[9px] md:text-sm font-bold text-emerald-600 tracking-wider md:tracking-[0.15em] uppercase mt-1 truncate">Higher Secondary School</span>
+                </div>
+            </a>
+
+            <ul id="mobile-menu" class="hidden lg:flex items-center space-x-8 font-extrabold text-gray-600 text-[13px] uppercase">
+                <li><a href="index.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Home</a></li>
+                <li><a href="faculty.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Faculty</a></li>
+                <li><a id="global-link-admissions-nav" data-feature="admissions" href="admissions.html" class="nav-link py-2 text-emerald-600 transition-all">Admissions</a></li>
+                <li><a href="insights.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Insights</a></li>
+                <li><a href="gallery.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Gallery</a></li>
+                <li><a href="downloads.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Downloads</a></li>
+                <li><a href="career.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Career</a></li>
+                <li><a href="contact.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Contact</a></li>
+                <li><a href="about.html" class="nav-link py-2 hover:text-emerald-600 transition-all">About Us</a></li>
+                <li class="mt-2 lg:mt-0">
+                    <a id="global-payment-regular" data-feature="online-payments" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-full hover:bg-blue-900 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        <i class="fas fa-credit-card text-sm"></i>
+                        <span>Pay Fees</span>
+                    </a>
+                </li>
+            </ul>
+
+            <button id="menu-btn" class="lg:hidden text-blue-900 focus:outline-none p-2 flex-shrink-0 relative z-[70]">
+                <i class="fas fa-bars text-3xl" id="menu-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="bg-blue-900 py-16 text-center text-white">
+        <h1 class="text-4xl font-black uppercase tracking-tight">Admission <span class="text-emerald-400">Portal</span></h1>
+        <p class="mt-2 text-emerald-100 font-medium">Session <span id="global-session"></span> - Application Form</p>
+    </header>
+
+    <main class="container mx-auto py-12 px-4 max-w-4xl">
+
+        <div id="success-message" class="hidden bg-emerald-100 border border-emerald-400 text-emerald-700 px-8 py-12 rounded-2xl text-center shadow-lg mb-8">
+            <i class="fas fa-check-circle text-6xl mb-4 text-emerald-500"></i>
+            <h2 class="text-2xl font-black uppercase mb-2">Application Submitted Successfully!</h2>
+            <p class="mb-6">Thank you for applying to LEADS Higher Secondary School. Our admissions team will review your application and contact you shortly.</p>
+            <button onclick="location.reload()" class="bg-emerald-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-emerald-700 transition">Submit Another Application</button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-12" id="form-container">
+            
+            <div class="flex justify-between items-center mb-12 relative">
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-gray-200 -z-10"></div>
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-emerald-500 -z-10 transition-all duration-300" id="progress-bar" style="width: 0%;"></div>
+
+                <div class="flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold bg-white step-indicator step-active" id="step1-indicator">1</div>
+                    <span class="text-xs font-bold mt-2 text-gray-500 uppercase">Student</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold bg-white step-indicator step-inactive" id="step2-indicator">2</div>
+                    <span class="text-xs font-bold mt-2 text-gray-500 uppercase">Academic</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold bg-white step-indicator step-inactive" id="step3-indicator">3</div>
+                    <span class="text-xs font-bold mt-2 text-gray-500 uppercase">Parents</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold bg-white step-indicator step-inactive" id="step4-indicator">4</div>
+                    <span class="text-xs font-bold mt-2 text-gray-500 uppercase">Uploads</span>
+                </div>
+            </div>
+
+            <form id="admissionForm" data-feature="admissions" onsubmit="submitForm(event)">
+                
+                <div class="form-section active" id="section1">
+                    <h3 class="text-2xl font-black text-blue-900 mb-6 uppercase border-l-4 border-emerald-500 pl-3">Student Information</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div class="md:col-span-2 bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
+                            <label class="block text-sm font-bold text-blue-900 mb-2">Class Applying For *</label>
+                            <select name="classApplying" required onchange="toggleSubjectSelection(this)" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 bg-white">
+                                <option value="">Select Class</option>
+                                <option value="Play School">Play School</option>
+                                <option value="Nursery">Nursery</option>
+                                <option value="KG IV">KG IV</option>
+                                <option value="KG V">KG V</option>
+                                <option value="Class 1">Class 1</option>
+                                <option value="Class 2">Class 2</option>
+                                <option value="Class 3">Class 3</option>
+                                <option value="Class 4">Class 4</option>
+                                <option value="Class 5">Class 5</option>
+                                <option value="Class 6">Class 6</option>
+                                <option value="Class 7">Class 7</option>
+                                <option value="Class 8">Class 8</option>
+                                <option value="Class 9">Class 9</option>
+                                <option value="Class 10">Class 10</option>
+                                <option value="Class 11 (Arts)">Class 11 (Arts)</option>
+                                <option value="Class 11 (Science)">Class 11 (Science)</option>
+                                <option value="Class 12 (Arts)">Class 12 (Arts)</option>
+                                <option value="Class 12 (Science)">Class 12 (Science)</option>
+                            </select>
+                        </div>
+
+                        <div id="subject-selection-container" class="hidden md:col-span-2 bg-slate-50 p-6 rounded-xl border border-gray-200 mt-2 mb-4 shadow-inner">
+                            <h4 class="text-lg font-bold text-blue-900 mb-2">Subject Selection (Class 11 & 12)</h4>
+                            <p class="text-sm text-gray-500 mb-4">Please check the subjects you wish to opt for. <span class="font-bold text-slate-800">(English is Compulsory)</span></p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h5 class="font-bold text-emerald-700 border-b border-emerald-200 pb-2 mb-3">Arts Stream</h5>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Political Science" class="mr-3 w-4 h-4 text-emerald-600"> Political Science</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Education" class="mr-3 w-4 h-4 text-emerald-600"> Education</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Sociology" class="mr-3 w-4 h-4 text-emerald-600"> Sociology</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="History" class="mr-3 w-4 h-4 text-emerald-600"> History</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Economics" class="mr-3 w-4 h-4 text-emerald-600"> Economics</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Elective English" class="mr-3 w-4 h-4 text-emerald-600"> Elective English</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Khasi" class="mr-3 w-4 h-4 text-emerald-600"> Khasi (MIL)</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Alternative English" class="mr-3 w-4 h-4 text-emerald-600"> Alternative English</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-700 border-b border-blue-200 pb-2 mb-3">Science Stream</h5>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Physics" class="mr-3 w-4 h-4 text-blue-600"> Physics</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Chemistry" class="mr-3 w-4 h-4 text-blue-600"> Chemistry</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Mathematics" class="mr-3 w-4 h-4 text-blue-600"> Mathematics</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Biology" class="mr-3 w-4 h-4 text-blue-600"> Biology</label>
+                                        <label class="flex items-center"><input type="checkbox" name="subject" value="Computer Science" class="mr-3 w-4 h-4 text-blue-600"> Computer Science</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Student's Full Name *</label>
+                            <input type="text" name="studentName" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Date of Birth *</label>
+                            <input type="date" name="dob" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Gender *</label>
+                            <select name="gender" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Nationality *</label>
+                            <select name="nationality" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                <option value="Indian" selected>Indian</option>
+                                <option value="Nepalese">Nepalese</option>
+                                <option value="Bhutanese">Bhutanese</option>
+                                <option value="Bangladeshi">Bangladeshi</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Religion *</label>
+                            <select name="religion" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                <option value="">Select Religion</option>
+                                <option value="Hinduism">Hinduism</option>
+                                <option value="Christianity">Christianity</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Sikhism">Sikhism</option>
+                                <option value="Buddhism">Buddhism</option>
+                                <option value="Jainism">Jainism</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Category *</label>
+                            <select name="category" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                <option value="">Select Category</option>
+                                <option value="General">General</option>
+                                <option value="ST">ST</option>
+                                <option value="SC">SC</option>
+                                <option value="OBC">OBC</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Caste / Tribe *</label>
+                            <select name="casteTribe" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                <option value="">Select Caste / Tribe</option>
+                                <option value="Khasi">Khasi</option>
+                                <option value="Garo">Garo</option>
+                                <option value="Jaintia">Jaintia</option>
+                                <option value="Meitei">Meitei</option>
+                                <option value="Naga">Naga</option>
+                                <option value="Mizo">Mizo</option>
+                                <option value="Bodo">Bodo</option>
+                                <option value="Karbi">Karbi</option>
+                                <option value="Rabha">Rabha</option>
+                                <option value="Kuki">Kuki</option>
+                                <option value="Ahom">Ahom</option>
+                                <option value="Mishing">Mishing</option>
+                                <option value="Dimasa">Dimasa</option>
+                                <option value="Tripuri">Tripuri</option>
+                                <option value="Bhutia">Bhutia</option>
+                                <option value="Lepcha">Lepcha</option>
+                                <option value="General/Unreserved">General / Unreserved</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Aadhaar Number (Optional)</label>
+                            <input type="text" name="studentAadhaar" pattern="[0-9]{12}" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')" title="Aadhaar must be exactly 12 digits" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Residential Address *</label>
+                            <textarea name="address" rows="3" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 flex justify-end">
+                        <button type="button" onclick="nextSection(1)" class="bg-blue-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition">Next Step <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-section" id="section2">
+                    <h3 class="text-2xl font-black text-blue-900 mb-6 uppercase border-l-4 border-emerald-500 pl-3">Academic Details</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Previous School Attended</label>
+                            <input type="text" id="prevSchool" name="prevSchool" oninput="toggleReasonLeaving()" placeholder="Leave blank if not applicable (First Time Enrollment)" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                        </div>
+
+                        <div id="reason-leaving-container" class="hidden md:col-span-2 bg-yellow-50 p-4 border border-yellow-200 rounded-lg">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Reason for Leaving Previous School *</label>
+                            <textarea id="reasonLeaving" name="reasonLeaving" rows="2" placeholder="Please state the reason for transferring" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500 bg-white"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Last Class Passed</label>
+                            <select name="lastClass" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                <option value="">Select Last Class Passed</option>
+                                <option value="None">None / First Time Enrollment</option>
+                                <option value="Play School">Play School</option>
+                                <option value="Nursery">Nursery</option>
+                                <option value="KG IV">KG IV</option>
+                                <option value="KG V">KG IV</option>
+                                <option value="Class 1">Class 1</option>
+                                <option value="Class 2">Class 2</option>
+                                <option value="Class 3">Class 3</option>
+                                <option value="Class 4">Class 4</option>
+                                <option value="Class 5">Class 5</option>
+                                <option value="Class 6">Class 6</option>
+                                <option value="Class 7">Class 7</option>
+                                <option value="Class 8">Class 8</option>
+                                <option value="Class 9">Class 9</option>
+                                <option value="Class 10">Class 10</option>
+                                <option value="Class 11">Class 11</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Percentage / Grade Obtained</label>
+                            <input type="text" name="percentage" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between">
+                        <button type="button" onclick="prevSection(2)" class="text-gray-500 font-bold hover:text-blue-900 px-4 py-2"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button type="button" onclick="nextSection(2)" class="bg-blue-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition">Next Step <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-section" id="section3">
+                    <h3 class="text-2xl font-black text-blue-900 mb-6 uppercase border-l-4 border-emerald-500 pl-3">Parent / Guardian Details</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div class="md:col-span-2 bg-emerald-50 p-6 rounded-lg border border-emerald-200 shadow-sm">
+                            <h4 class="font-bold text-lg mb-4 text-emerald-900 border-b border-emerald-200 pb-2">Primary Contact Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Guardian Contact Number *</label>
+                                    <input type="tel" name="guardianPhone" required pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" title="Please enter a valid 10-digit phone number" placeholder="10-digit mobile number" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Primary Email Address *</label>
+                                    <input type="email" name="email" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Please enter a valid email address (e.g., name@example.com)" placeholder="name@example.com" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2 bg-gray-50 p-6 rounded-lg border border-gray-200 mt-2">
+                            <h4 class="font-bold text-lg mb-4 text-blue-900">Father's Details</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Name *</label>
+                                    <input type="text" name="fatherName" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Occupation</label>
+                                    <input type="text" name="fatherOccupation" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Alternate Phone (Optional)</label>
+                                    <input type="tel" name="fatherPhone" pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" title="Please enter a valid 10-digit phone number" placeholder="10-digit mobile number" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2 bg-gray-50 p-6 rounded-lg border border-gray-200">
+                            <h4 class="font-bold text-lg mb-4 text-blue-900">Mother's Details</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Name *</label>
+                                    <input type="text" name="motherName" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Occupation</label>
+                                    <input type="text" name="motherOccupation" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Alternate Phone (Optional)</label>
+                                    <input type="tel" name="motherPhone" pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" title="Please enter a valid 10-digit phone number" placeholder="10-digit mobile number" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-8 flex justify-between">
+                        <button type="button" onclick="prevSection(3)" class="text-gray-500 font-bold hover:text-blue-900 px-4 py-2"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button type="button" onclick="nextSection(3)" class="bg-blue-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition">Next Step <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-section" id="section4">
+                    <h3 class="text-2xl font-black text-blue-900 mb-6 uppercase border-l-4 border-emerald-500 pl-3">Document Uploads</h3>
+                    <p class="text-sm text-gray-600 mb-6 bg-yellow-50 p-4 rounded border border-yellow-200"><i class="fas fa-info-circle text-yellow-600 mr-2"></i> Please upload clear images or PDFs. Maximum file size is 2MB per file. Files will be automatically renamed with the student's name upon submission.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        
+                        <div class="border border-emerald-200 p-4 rounded-lg bg-emerald-50/30">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Passport Size Photo (Compulsory) *</label>
+                            <input type="file" name="file_photo" accept="image/*" required class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-emerald-100 file:text-emerald-700 hover:file:bg-emerald-200 cursor-pointer">
+                            <p class="text-xs text-gray-500 mt-2">Formats: JPG, PNG, JPEG</p>
+                        </div>
+                        
+                        <div class="border border-gray-200 p-4 rounded-lg bg-gray-50">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Birth Certificate *</label>
+                            <input type="file" name="file_birthCert" accept="image/*,.pdf" required class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
+                        </div>
+                        
+                        <div class="border border-gray-200 p-4 rounded-lg bg-gray-50">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Last Marksheet/Report Card</label>
+                            <input type="file" name="file_reportCard" accept="image/*,.pdf" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
+                        </div>
+                        
+                        <div class="border border-gray-200 p-4 rounded-lg bg-gray-50">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Transfer Certificate (if applicable)</label>
+                            <input type="file" name="file_tc" accept="image/*,.pdf" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
+                        </div>
+                        
+                        <div class="border border-gray-200 p-4 rounded-lg bg-gray-50 md:col-span-2">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Aadhaar Card (Student)</label>
+                            <input type="file" name="file_aadhaar" accept="image/*,.pdf" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <label class="flex items-start cursor-pointer">
+                            <input type="checkbox" required class="mt-1 mr-3 w-5 h-5 text-emerald-600">
+                            <span class="text-sm text-gray-600">I hereby declare that the information provided above is true and correct to the best of my knowledge. I understand that any false information may lead to the cancellation of admission.</span>
+                        </label>
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center">
+                        <button type="button" onclick="prevSection(4)" class="text-gray-500 font-bold hover:text-blue-900 px-4 py-2"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button type="submit" id="submitBtn" class="bg-emerald-600 text-white px-10 py-4 rounded-lg font-black uppercase tracking-wider hover:bg-emerald-700 transition shadow-xl transform hover:-translate-y-1 flex items-center">
+                            <span id="submitText">Submit Application</span>
+                            <i id="submitSpinner" class="fas fa-circle-notch fa-spin ml-3 hidden"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 pt-16 pb-8 border-t border-gray-200">
+        <div class="container mx-auto px-4 grid md:grid-cols-4 gap-12 text-sm text-gray-600">
+            <div class="col-span-1 md:col-span-2">
+                <h4 class="text-xl font-black text-blue-900 mb-6 uppercase"><span id="global-school-shortname-footer">LEADS</span> <span class="text-emerald-600">SCHOOL</span></h4>
+                <p class="mb-4"><span id="global-address-street-footer"></span>, <span id="global-address-city"></span></p>
+                <p id="global-tagline" class="italic text-xs"></p>
+                
+                <div class="mt-6 space-y-3 font-medium">
+                    <a id="global-link-phone-footer" href="#" class="flex items-center gap-3 hover:text-emerald-600 transition-colors w-fit">
+                        <i class="fas fa-phone text-emerald-600"></i> <span id="global-phone-1-footer"></span>
+                    </a>
+                    <a id="global-link-email-footer" href="#" class="flex items-center gap-3 hover:text-emerald-600 transition-colors w-fit">
+                        <i class="fas fa-envelope text-emerald-600"></i> <span id="global-email-general-footer"></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h5 class="font-bold text-blue-900 mb-6 uppercase text-xs tracking-widest">Navigation</h5>
+                <ul class="space-y-3">
+                    <li><a id="global-link-admissions-footer" data-feature="admissions" href="admissions.html" class="hover:text-emerald-600 transition">Admissions</a></li>
+                    <li><a href="insights.html" class="hover:text-emerald-600 transition">Insights</a></li>
+                    <li><a href="downloads.html" class="hover:text-emerald-600 transition">Downloads</a></li>
+                    <li><a href="career.html" class="hover:text-emerald-600 transition">Career</a></li>
+                    <li><a href="about.html" class="hover:text-emerald-600 transition">About Us</a></li>
+                    <li><a href="terms.html" class="hover:text-emerald-600 transition font-bold">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="font-bold text-blue-900 mb-6 uppercase text-xs tracking-widest">Connect</h5>
+                <div class="flex space-x-4 text-xl">
+                    <a id="global-link-fb" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600"><i class="fab fa-facebook"></i></a>
+                    <a id="global-link-ig" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600"><i class="fab fa-instagram"></i></a>
+                    <a id="global-link-yt" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-16 pt-8 border-t border-gray-200 text-gray-400 text-xs">
+            <p id="global-copyright"></p>
+            <div class="mt-2">
+                <a href="terms.html" class="hover:text-emerald-600 transition underline decoration-dotted">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+
+    <script>
+        function toggleSubjectSelection(selectElement) {
+            const classVal = selectElement.value;
+            const container = document.getElementById('subject-selection-container');
+            
+            if (classVal.includes('11') || classVal.includes('12')) {
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+                const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(cb => cb.checked = false);
+            }
+        }
+
+        function toggleReasonLeaving() {
+            const prevSchoolInput = document.getElementById('prevSchool');
+            const reasonContainer = document.getElementById('reason-leaving-container');
+            const reasonInput = document.getElementById('reasonLeaving');
+            
+            if (prevSchoolInput.value.trim().length > 0) {
+                reasonContainer.classList.remove('hidden');
+                reasonInput.required = true;
+            } else {
+                reasonContainer.classList.add('hidden');
+                reasonInput.required = false;
+                reasonInput.value = ''; 
+            }
+        }
+
+        function nextSection(current) {
+            const currentSection = document.getElementById('section' + current);
+            // VALIDATION UPDATE: Now queries ALL inputs, not just required ones.
+            // This ensures optional fields with patterns (like Father's Phone) are still fully validated before moving on.
+            const inputs = currentSection.querySelectorAll('input, select, textarea');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) return;
+
+            document.getElementById(`section${current}`).classList.remove('active');
+            document.getElementById(`section${current + 1}`).classList.add('active');
+            updateProgress(current + 1);
+            window.scrollTo({ top: document.getElementById('form-container').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function prevSection(current) {
+            document.getElementById(`section${current}`).classList.remove('active');
+            document.getElementById(`section${current - 1}`).classList.add('active');
+            updateProgress(current - 1);
+            window.scrollTo({ top: document.getElementById('form-container').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function updateProgress(step) {
+            const widths = {1: '0%', 2: '33%', 3: '66%', 4: '100%'};
+            document.getElementById('progress-bar').style.width = widths[step];
+
+            for (let i = 1; i <= 4; i++) {
+                const indicator = document.getElementById(`step${i}-indicator`);
+                indicator.classList.remove('step-active', 'step-inactive', 'step-completed');
+                
+                if (i < step) {
+                    indicator.classList.add('step-completed');
+                    indicator.innerHTML = '<i class="fas fa-check"></i>';
+                } else if (i === step) {
+                    indicator.classList.add('step-active');
+                    indicator.innerHTML = i;
+                } else {
+                    indicator.classList.add('step-inactive');
+                    indicator.innerHTML = i;
+                }
+            }
+        }
+
+        // REPLACE WITH YOUR ACTUAL WEB APP URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwY9IIgrSZVzII9VEqW-SO4nUNWMex0BLkPYkCgTCngO8MKI4vy1rOdaSM6N_l8ug-RcA/exec";
+
+        function getBase64(file, customBaseName) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    const extension = file.name.split('.').pop();
+                    const finalName = customBaseName ? `${customBaseName}.${extension}` : file.name;
+                    resolve({
+                        name: finalName,
+                        type: file.type,
+                        data: reader.result.split(',')[1] 
+                    });
+                };
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        async function submitForm(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('submitText');
+            const spinner = document.getElementById('submitSpinner');
+            const form = document.getElementById('admissionForm');
+            const successMsg = document.getElementById('success-message');
+
+            btn.disabled = true;
+            btnText.innerText = "Submitting...";
+            spinner.classList.remove('hidden');
+
+            try {
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+
+                const rawName = formData.get('studentName') || 'Student';
+                const safeStudentName = rawName.trim().replace(/[^a-zA-Z0-9]/g, '_');
+
+                const subjects = [];
+                const subjectCheckboxes = form.querySelectorAll('input[name="subject"]:checked');
+                subjectCheckboxes.forEach((checkbox) => { subjects.push(checkbox.value); });
+                data.subjects = subjects.join(", ");
+
+                const files = {};
+                if(formData.get('file_birthCert').size > 0) files.birthCert = await getBase64(formData.get('file_birthCert'), `${safeStudentName}_BirthCert`);
+                if(formData.get('file_tc').size > 0) files.tc = await getBase64(formData.get('file_tc'), `${safeStudentName}_TC`);
+                if(formData.get('file_reportCard').size > 0) files.reportCard = await getBase64(formData.get('file_reportCard'), `${safeStudentName}_ReportCard`);
+                if(formData.get('file_photo').size > 0) files.photo = await getBase64(formData.get('file_photo'), `${safeStudentName}_Photo`);
+                if(formData.get('file_aadhaar').size > 0) files.aadhaar = await getBase64(formData.get('file_aadhaar'), `${safeStudentName}_Aadhaar`);
+
+                const payload = { ...data, files: files };
+                
+                const response = await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    form.classList.add('hidden');
+                    successMsg.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    throw new Error(result.message || "Database error occurred on the server.");
+                }
+
+            } catch (error) {
+                console.error("Submission Error:", error);
+                alert("Error submitting the form: " + error.message + "\nPlease check your connection and try again.");
+            } finally {
+                btn.disabled = false;
+                btnText.innerText = "Submit Application";
+                spinner.classList.add('hidden');
+            }
+        }
+    </script>
+    <script src="js/pwa.js"></script>
+</body>
+</html>

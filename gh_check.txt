@@ -1,0 +1,4 @@
+ls_usr_local_bin:
+ls: /usr/local/bin/gh: No such file or directory
+lrwxr-xr-x@ 1 root  wheel  72 Sep  7  2024 /usr/local/bin/github -> /Applications/GitHub Desktop.app/Contents/Resources/app/static/github.sh
+brew_list:

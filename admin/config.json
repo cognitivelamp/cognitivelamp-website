@@ -1,0 +1,362 @@
+{
+  "site": {
+    "templateName": "School Website Template",
+    "version": "1.0.0",
+    "technology": {
+      "frontend": "HTML",
+      "styling": "Tailwind CSS",
+      "scripting": "JavaScript"
+    },
+    "hosting": {
+      "provider": "GitHub Pages",
+      "repository": "your-org/your-school-website"
+    }
+  },
+  "designTokens": {
+    "colors": {
+      "primary": "#059669",
+      "secondary": "#1E3A8A",
+      "accent": "#F59E0B",
+      "background": "#FFFFFF",
+      "surface": "#F8FAFC",
+      "text": "#0F172A"
+    },
+    "borderRadius": {
+      "small": "0.375rem",
+      "medium": "0.5rem",
+      "large": "0.75rem",
+      "pill": "9999px"
+    },
+    "fontFamily": {
+      "heading": "Poppins, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif",
+      "body": "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif",
+      "mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+    }
+  },
+  "theme": {
+    "activeTheme": "Universal",
+    "defaultTheme": "Universal",
+    "description": "Balanced and modern theme suitable for school websites.",
+    "themes": [
+      {
+        "name": "Universal",
+        "active": true,
+        "description": "Balanced and modern theme suitable for school websites.",
+        "tokens": {
+          "primary": "#059669",
+          "primaryLight": "#34D399",
+          "primaryDark": "#047857",
+          "secondary": "#1E3A8A",
+          "secondaryLight": "#3B82F6",
+          "secondaryDark": "#1E40AF",
+          "accent": "#D97706",
+          "accentLight": "#F59E0B",
+          "accentDark": "#B45309",
+          "background": "#FFFFFF",
+          "surface": "#F8FAFC",
+          "text": "#0F172A",
+          "mutedText": "#475569"
+        }
+      },
+      {
+        "name": "Ocean Blue",
+        "active": false,
+        "description": "Clean blue palette with a professional institutional look.",
+        "tokens": {
+          "primary": "#0EA5E9",
+          "primaryLight": "#BAE6FD",
+          "primaryDark": "#0369A1",
+          "secondary": "#3B82F6",
+          "secondaryLight": "#BFDBFE",
+          "secondaryDark": "#1D4ED8",
+          "accent": "#38BDF8",
+          "accentLight": "#E0F2FE",
+          "accentDark": "#0284C7",
+          "background": "#F8FBFF",
+          "surface": "#F0F7FF",
+          "text": "#0F172A",
+          "mutedText": "#475569"
+        }
+      },
+      {
+        "name": "Forest Green",
+        "active": false,
+        "description": "Nature-inspired green tones for a calm and growth-centric identity.",
+        "tokens": {
+          "primary": "#22C55E",
+          "primaryLight": "#BBF7D0",
+          "primaryDark": "#15803D",
+          "secondary": "#10B981",
+          "secondaryLight": "#A7F3D0",
+          "secondaryDark": "#047857",
+          "accent": "#84CC16",
+          "accentLight": "#ECFCCB",
+          "accentDark": "#65A30D",
+          "background": "#F7FFF8",
+          "surface": "#ECFDF3",
+          "text": "#14532D",
+          "mutedText": "#3F6212"
+        }
+      },
+      {
+        "name": "Royal Purple",
+        "active": false,
+        "description": "Premium purple-blue styling for a distinctive academic brand.",
+        "tokens": {
+          "primary": "#A78BFA",
+          "primaryLight": "#E9D5FF",
+          "primaryDark": "#7C3AED",
+          "secondary": "#818CF8",
+          "secondaryLight": "#C7D2FE",
+          "secondaryDark": "#4F46E5",
+          "accent": "#F472B6",
+          "accentLight": "#FCE7F3",
+          "accentDark": "#DB2777",
+          "background": "#FCFAFF",
+          "surface": "#F5F3FF",
+          "text": "#3B0764",
+          "mutedText": "#5B4B8A"
+        }
+      },
+      {
+        "name": "Sunset Warm",
+        "active": false,
+        "description": "Energetic orange-red palette ideal for a vibrant school presence.",
+        "tokens": {
+          "primary": "#FB923C",
+          "primaryLight": "#FED7AA",
+          "primaryDark": "#EA580C",
+          "secondary": "#F59E0B",
+          "secondaryLight": "#FDE68A",
+          "secondaryDark": "#D97706",
+          "accent": "#F87171",
+          "accentLight": "#FEE2E2",
+          "accentDark": "#EF4444",
+          "background": "#FFFBF7",
+          "surface": "#FFF1E8",
+          "text": "#431407",
+          "mutedText": "#9A3412"
+        }
+      },
+      {
+        "name": "Pastel Light",
+        "active": false,
+        "description": "Soft pastel palette with gentle contrast for a light, airy visual style.",
+        "tokens": {
+          "primary": "#7DD3FC",
+          "primaryLight": "#E0F2FE",
+          "primaryDark": "#38BDF8",
+          "secondary": "#A5B4FC",
+          "secondaryLight": "#E0E7FF",
+          "secondaryDark": "#818CF8",
+          "accent": "#F9A8D4",
+          "accentLight": "#FCE7F3",
+          "accentDark": "#F472B6",
+          "background": "#FFFCFF",
+          "surface": "#F8FAFF",
+          "text": "#334155",
+          "mutedText": "#64748B"
+        }
+      }
+    ]
+  },
+  "seo": {
+    "metadata": {
+      "title": "LEADS Higher Secondary School | Empowering Minds, Shaping Futures",
+      "description": "A reusable school website template powered by HTML, Tailwind CSS, JavaScript, and JSON-driven content.",
+      "keywords": [
+        "school",
+        "education",
+        "higher secondary",
+        "admissions",
+        "academic excellence",
+        "school website template"
+      ],
+      "author": "LEADS Higher Secondary School",
+      "robots": "index, follow"
+    },
+    "openGraph": {
+      "title": "LEADS Higher Secondary School",
+      "description": "Discover our academic programs, admissions, faculty, and student life.",
+      "type": "website",
+      "url": "https://www.leadsshillong.com",
+      "image": "/school-logo.jpg",
+      "siteName": "LEADS Higher Secondary School",
+      "locale": "en_IN"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "LEADS Higher Secondary School",
+      "description": "Empowering Minds, Shaping Futures",
+      "image": "/school-logo.jpg"
+    }
+  },
+  "integrations": {
+    "googleAnalyticsEnabled": true,
+    "googleAnalyticsMeasurementId": "G-TBHE0DQ3JD",
+    "googleAnalyticsDebug": false,
+    "googleAnalyticsDedupeMs": 300,
+    "cusdisEnabled": true,
+    "cusdisAppId": "8f210d34-d73b-4096-ab5c-c4158ef30ac3",
+    "cusdisHost": "https://cusdis.com"
+  },
+  "identity": {
+    "fullName": "LEADS Higher Secondary School",
+    "shortName": "LEADS",
+    "tagline": "Empowering Minds, Shaping Futures",
+    "establishedYear": 2007,
+    "logoPath": "/school-logo.jpg"
+  },
+  "contact": {
+    "primaryPhone": "+91 88372 48004",
+    "secondaryPhone": "+91 94854 34534",
+    "website": "https://www.leadsshillong.com",
+    "emailGeneral": "support@leadsschool.com",
+    "emailAdmissions": "support@leadsschool.com",
+    "workingDays": "Monday - Friday",
+    "workingHours": "9:00 AM - 3:00 PM"
+  },
+  "location": {
+    "street": "Langkerding, Nongmensong",
+    "city": "Shillong",
+    "state": "Meghalaya",
+    "pinCode": "793019",
+    "googleMapsLink": "https://maps.app.goo.gl/Df9prKuJYtpbhnHg6",
+    "googleMapsEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.419033678317!2d91.9067664!3d25.590988499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x37507fd0a24eb3dd%3A0x9d32cb52d67507b9!2sLeads%20Higher%20Secondary%20School!5e0!3m2!1sen!2sin!4v1770129373388!5m2!1sen!2sin"
+  },
+  "socials": {
+    "facebook": "https://facebook.com/leadsshillong",
+    "instagram": "https://instagram.com/leadsshillong",
+    "youtube": "https://www.youtube.com/@leadsshillong",
+    "twitter": "https://twitter.com/leadsshillong"
+  },
+  "academics": {
+    "currentSession": "2026-2027",
+    "admissionStatus": "Open",
+    "admissionFormLink": "admissions.html"
+  },
+  "academicStructure": {
+    "classesOffered": [
+      "Play School",
+      "Nursery",
+      "KG IV",
+      "KG V",
+      "Class I",
+      "Class II",
+      "Class III",
+      "Class IV",
+      "Class V",
+      "Class VI",
+      "Class VII",
+      "Class VIII",
+      "Class IX",
+      "Class X",
+      "Class XI",
+      "Class XII"
+    ],
+    "subjects": {
+      "primary": [
+        "English",
+        "Mathematics",
+        "Environmental Studies",
+        "General Science",
+        "Social Studies",
+        "Computer Basics"
+      ],
+      "middle": [
+        "English",
+        "Mathematics",
+        "Science",
+        "Social Science",
+        "Computer Science",
+        "Second Language"
+      ],
+      "secondary": [
+        "English",
+        "Mathematics",
+        "Physics",
+        "Chemistry",
+        "Biology",
+        "History",
+        "Geography",
+        "Economics",
+        "Computer Applications"
+      ],
+      "higherSecondary": {
+        "science": [
+          "Physics",
+          "Chemistry",
+          "Biology",
+          "Mathematics",
+          "Computer Science"
+        ],
+        "arts": [
+          "History",
+          "Political Science",
+          "Economics",
+          "Sociology",
+          "Education"
+        ]
+      }
+    },
+    "houseSystem": {
+      "enabled": true,
+      "houses": [
+        {
+          "name": "Red House",
+          "motto": "Courage and Commitment",
+          "color": "#DC2626"
+        },
+        {
+          "name": "Blue House",
+          "motto": "Discipline and Determination",
+          "color": "#2563EB"
+        },
+        {
+          "name": "Green House",
+          "motto": "Growth and Gratitude",
+          "color": "#16A34A"
+        },
+        {
+          "name": "Yellow House",
+          "motto": "Excellence and Enthusiasm",
+          "color": "#EAB308"
+        }
+      ]
+    }
+  },
+  "leadership": {
+    "principal": {
+      "name": "Barrilyne Lyngdoh",
+      "designation": "Principal",
+      "photo": "faculty/media/principal.jpg",
+      "message": "Welcome message from the Principal goes here. This can be edited from Decap CMS.",
+      "signatureName": "Barrilyne Lyngdoh"
+    },
+    "chairperson": {
+      "name": "D. Kitbok Ryntathiang",
+      "message": "Message from the Chairperson goes here.",
+      "photo": "/media/chairperson.jpg"
+    }
+  },
+  "featureToggles": {
+    "showAdmissions": true,
+    "showGallery": true,
+    "showResults": true,
+    "showNews": true,
+    "showPrograms": true,
+    "showFaculty": true,
+    "showDownloads": true,
+    "showCalendar": true,
+    "showThoughtOfTheDay": true,
+    "showContactForm": true,
+    "showOnlinePayments": true,
+    "showChatWidget": true
+  },
+  "payments": {
+    "regularFee": "https://rzp.io/l/Ze17MQO3sa",
+    "admissionFee": "https://rzp.io/l/admission_link",
+    "eventsFee": "https://rzp.io/l/events_link",
+    "uniformsBooks": "https://rzp.io/l/uniforms_link"
+  }
+}

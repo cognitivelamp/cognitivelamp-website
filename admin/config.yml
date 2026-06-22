@@ -1,0 +1,688 @@
+# Use GitHub OAuth Worker auth
+backend:
+  name: github
+  repo: leadseducationaltrust/leadsshillong
+  branch: main
+  base_url: https://leadsshillong-cms-oauth.leadsshillong.workers.dev
+  auth_endpoint: auth
+
+  # See who did what (optional)
+  commit_messages:
+    create: Create {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via Decap CMS
+    update: Update {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via Decap CMS
+    delete: Delete {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via Decap CMS
+    uploadMedia: Upload “{{path}}” - {{author-name}} <{{author-login}}> via Decap CMS
+    deleteMedia: Delete “{{path}}” - {{author-name}} <{{author-login}}> via Decap CMS
+    openAuthoring: Message {{message}} - {{author-name}} <{{author-login}}> via Decap CMS
+
+# Decap CMS logo (optional)
+#logo_url: https://decapcms.org/img/decap-cms-logo.svg
+logo_url: "/school-logo.jpg"
+
+# Add site links in Decap CMS (optional)
+site_url: https://www.leadsshillong.com
+
+
+local_backend: false
+
+media_folder: "media"
+public_folder: "/media"
+
+#display_url: "https://www.leadsshillong.com"
+
+collections:
+  - name: "site_config"
+    label: "Site Config"
+    files:
+      - label: "Global Site Metadata"
+        name: "global_site_metadata"
+        file: "admin/config.json"
+        format: "json"
+        fields:
+          - label: "Site"
+            name: "site"
+            widget: "object"
+            fields:
+              - { label: "Template Name", name: "templateName", widget: "string" }
+              - { label: "Version", name: "version", widget: "string" }
+              - label: "Technology"
+                name: "technology"
+                widget: "object"
+                fields:
+                  - { label: "Frontend", name: "frontend", widget: "string" }
+                  - { label: "Styling", name: "styling", widget: "string" }
+                  - { label: "Scripting", name: "scripting", widget: "string" }
+              - label: "Hosting"
+                name: "hosting"
+                widget: "object"
+                fields:
+                  - { label: "Provider", name: "provider", widget: "string" }
+                  - { label: "Repository", name: "repository", widget: "string" }
+
+          - label: "Design Tokens"
+            name: "designTokens"
+            widget: "object"
+            fields:
+              - label: "Colors"
+                name: "colors"
+                widget: "object"
+                fields:
+                  - { label: "Primary", name: "primary", widget: "string", hint: "Hex color e.g. #1D4ED8" }
+                  - { label: "Secondary", name: "secondary", widget: "string", hint: "Hex color e.g. #0F766E" }
+                  - { label: "Accent", name: "accent", widget: "string", hint: "Hex color e.g. #F59E0B" }
+                  - { label: "Background", name: "background", widget: "string", required: false }
+                  - { label: "Surface", name: "surface", widget: "string", required: false }
+                  - { label: "Text", name: "text", widget: "string", required: false }
+              - label: "Border Radius"
+                name: "borderRadius"
+                widget: "object"
+                fields:
+                  - { label: "Small", name: "small", widget: "string" }
+                  - { label: "Medium", name: "medium", widget: "string" }
+                  - { label: "Large", name: "large", widget: "string" }
+                  - { label: "Pill", name: "pill", widget: "string", required: false }
+              - label: "Font Family"
+                name: "fontFamily"
+                widget: "object"
+                fields:
+                  - { label: "Heading", name: "heading", widget: "string" }
+                  - { label: "Body", name: "body", widget: "string" }
+                  - { label: "Monospace", name: "mono", widget: "string", required: false }
+
+          - label: "Theme"
+            name: "theme"
+            widget: "object"
+            hint: "Set one theme as active=true to apply site-wide colors. Keep Universal active by default."
+            fields:
+              - { label: "Active Theme Name", name: "activeTheme", widget: "string", required: false, hint: "Fallback by name if no theme is marked active." }
+              - { label: "Default Theme Name", name: "defaultTheme", widget: "string", required: false, default: "Universal" }
+              - { label: "Theme Description", name: "description", widget: "text", required: false }
+              - label: "Themes"
+                name: "themes"
+                widget: "list"
+                summary: "{{fields.name}} (active: {{fields.active}})"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Active", name: "active", widget: "boolean", default: false, hint: "Activate only one theme at a time." }
+                  - { label: "Description", name: "description", widget: "text", required: false }
+                  - label: "Tokens"
+                    name: "tokens"
+                    widget: "object"
+                    fields:
+                      - { label: "Primary", name: "primary", widget: "string", hint: "Hex color e.g. #059669" }
+                      - { label: "Primary Light", name: "primaryLight", widget: "string", required: false }
+                      - { label: "Primary Dark", name: "primaryDark", widget: "string", required: false }
+                      - { label: "Secondary", name: "secondary", widget: "string", required: false }
+                      - { label: "Secondary Light", name: "secondaryLight", widget: "string", required: false }
+                      - { label: "Secondary Dark", name: "secondaryDark", widget: "string", required: false }
+                      - { label: "Accent", name: "accent", widget: "string", required: false }
+                      - { label: "Accent Light", name: "accentLight", widget: "string", required: false }
+                      - { label: "Accent Dark", name: "accentDark", widget: "string", required: false }
+                      - { label: "Background", name: "background", widget: "string", required: false }
+                      - { label: "Surface", name: "surface", widget: "string", required: false }
+                      - { label: "Text", name: "text", widget: "string", required: false }
+                      - { label: "Muted Text", name: "mutedText", widget: "string", required: false }
+
+          - label: "SEO"
+            name: "seo"
+            widget: "object"
+            fields:
+              - label: "Metadata"
+                name: "metadata"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - label: "Keywords"
+                    name: "keywords"
+                    widget: "list"
+                    field: { label: "Keyword", name: "keyword", widget: "string" }
+                  - { label: "Author", name: "author", widget: "string", required: false }
+                  - { label: "Robots", name: "robots", widget: "string", required: false }
+              - label: "OpenGraph"
+                name: "openGraph"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Type", name: "type", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+                  - { label: "Image", name: "image", widget: "string" }
+                  - { label: "Site Name", name: "siteName", widget: "string" }
+                  - { label: "Locale", name: "locale", widget: "string", required: false }
+              - label: "Twitter"
+                name: "twitter"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Card", name: "card", widget: "string", required: false }
+                  - { label: "Title", name: "title", widget: "string", required: false }
+                  - { label: "Description", name: "description", widget: "text", required: false }
+                  - { label: "Image", name: "image", widget: "string", required: false }
+
+          - label: "Integrations"
+            name: "integrations"
+            widget: "object"
+            fields:
+              - { label: "Google Analytics Enabled", name: "googleAnalyticsEnabled", widget: "boolean", default: false }
+              - { label: "Google Analytics Measurement ID", name: "googleAnalyticsMeasurementId", widget: "string", required: false, hint: "Format: G-XXXXXXXXXX" }
+              - { label: "Google Analytics Debug", name: "googleAnalyticsDebug", widget: "boolean", default: false, required: false }
+              - { label: "Google Analytics Dedupe Milliseconds", name: "googleAnalyticsDedupeMs", widget: "number", value_type: "int", default: 300, min: 0, max: 2000, required: false }
+              - { label: "Cusdis Enabled", name: "cusdisEnabled", widget: "boolean", default: false, hint: "Enable article comments with Cusdis." }
+              - { label: "Cusdis App ID", name: "cusdisAppId", widget: "string", required: false, hint: "Get this from Cusdis dashboard (Website/App ID)." }
+              - { label: "Cusdis Host", name: "cusdisHost", widget: "string", required: false, default: "https://cusdis.com", hint: "Use https://cusdis.com unless self-hosting." }
+
+          - label: "Identity"
+            name: "identity"
+            widget: "object"
+            fields:
+              - { label: "Full Name", name: "fullName", widget: "string" }
+              - { label: "Short Name", name: "shortName", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+              - { label: "Established Year", name: "establishedYear", widget: "number", value_type: "int" }
+              - { label: "Logo Path", name: "logoPath", widget: "string" }
+
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Primary Phone", name: "primaryPhone", widget: "string" }
+              - { label: "Secondary Phone", name: "secondaryPhone", widget: "string", required: false }
+              - { label: "Website", name: "website", widget: "string" }
+              - { label: "General Email", name: "emailGeneral", widget: "string" }
+              - { label: "Admissions Email", name: "emailAdmissions", widget: "string" }
+              - { label: "Working Days", name: "workingDays", widget: "string" }
+              - { label: "Working Hours", name: "workingHours", widget: "string" }
+
+          - label: "Location"
+            name: "location"
+            widget: "object"
+            fields:
+              - { label: "Street", name: "street", widget: "string" }
+              - { label: "City", name: "city", widget: "string" }
+              - { label: "State", name: "state", widget: "string" }
+              - { label: "PIN Code", name: "pinCode", widget: "string" }
+              - { label: "Google Maps Link", name: "googleMapsLink", widget: "string" }
+              - { label: "Google Maps Embed", name: "googleMapsEmbed", widget: "text" }
+
+          - label: "Socials"
+            name: "socials"
+            widget: "object"
+            fields:
+              - { label: "Facebook", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "YouTube", name: "youtube", widget: "string", required: false }
+              - { label: "Twitter", name: "twitter", widget: "string", required: false }
+
+          - label: "Academics"
+            name: "academics"
+            widget: "object"
+            fields:
+              - { label: "Current Session", name: "currentSession", widget: "string" }
+              - { label: "Admission Status", name: "admissionStatus", widget: "string" }
+              - { label: "Admission Form Link", name: "admissionFormLink", widget: "string" }
+
+          - label: "Academic Structure"
+            name: "academicStructure"
+            widget: "object"
+            fields:
+              - label: "Classes Offered"
+                name: "classesOffered"
+                widget: "list"
+                field: { label: "Class", name: "class", widget: "string" }
+              - label: "Subjects"
+                name: "subjects"
+                widget: "object"
+                fields:
+                  - label: "Primary"
+                    name: "primary"
+                    widget: "list"
+                    required: false
+                    field: { label: "Subject", name: "subject", widget: "string" }
+                  - label: "Middle"
+                    name: "middle"
+                    widget: "list"
+                    required: false
+                    field: { label: "Subject", name: "subject", widget: "string" }
+                  - label: "Secondary"
+                    name: "secondary"
+                    widget: "list"
+                    required: false
+                    field: { label: "Subject", name: "subject", widget: "string" }
+                  - label: "Higher Secondary"
+                    name: "higherSecondary"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - label: "Science"
+                        name: "science"
+                        widget: "list"
+                        required: false
+                        field: { label: "Subject", name: "subject", widget: "string" }
+                      - label: "Arts"
+                        name: "arts"
+                        widget: "list"
+                        required: false
+                        field: { label: "Subject", name: "subject", widget: "string" }
+              - label: "House System"
+                name: "houseSystem"
+                widget: "object"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
+                  - label: "Houses"
+                    name: "houses"
+                    widget: "list"
+                    fields:
+                      - { label: "Name", name: "name", widget: "string" }
+                      - { label: "Motto", name: "motto", widget: "string", required: false }
+                      - { label: "Color", name: "color", widget: "string", hint: "Hex color" }
+
+          - label: "Leadership"
+            name: "leadership"
+            widget: "object"
+            fields:
+              - label: "Principal"
+                name: "principal"
+                widget: "object"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Designation", name: "designation", widget: "string", required: false }
+                  - { label: "Photo", name: "photo", widget: "string", required: false }
+                  - { label: "Message", name: "message", widget: "text" }
+                  - { label: "Signature Name", name: "signatureName", widget: "string", required: false }
+              - label: "Chairperson"
+                name: "chairperson"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Name", name: "name", widget: "string", required: false }
+                  - { label: "Message", name: "message", widget: "text", required: false }
+                  - { label: "Photo", name: "photo", widget: "string", required: false }
+
+          - label: "Feature Toggles"
+            name: "featureToggles"
+            widget: "object"
+            hint: "Turn sections on/off site-wide. These toggles are applied by js/config.js."
+            fields:
+              - { label: "Show Admissions", name: "showAdmissions", widget: "boolean", default: true, hint: "Controls admissions links, home Apply button, and admissions form blocks." }
+              - { label: "Show Gallery", name: "showGallery", widget: "boolean", default: true, hint: "Controls gallery navigation links and gallery-marked sections." }
+              - { label: "Show Results", name: "showResults", widget: "boolean", default: true, hint: "Controls result-related links and sections marked for results." }
+              - { label: "Show News", name: "showNews", widget: "boolean", default: true, hint: "Controls home news alert bar, modal, and news-marked sections." }
+              - { label: "Show Programs", name: "showPrograms", widget: "boolean", default: true, hint: "Controls programs links, home programmes section, and program-page blocks." }
+              - { label: "Show Faculty", name: "showFaculty", widget: "boolean", default: true, hint: "Controls faculty links and faculty-marked sections." }
+              - { label: "Show Downloads", name: "showDownloads", widget: "boolean", default: true, hint: "Controls downloads links and downloads-marked sections." }
+              - { label: "Show Calendar", name: "showCalendar", widget: "boolean", default: true, hint: "Controls the home calendar panel and calendar-marked sections." }
+              - { label: "Show Thought Of The Day", name: "showThoughtOfTheDay", widget: "boolean", default: true, hint: "Controls thought panel and thought-marked sections." }
+              - { label: "Show Contact Form", name: "showContactForm", widget: "boolean", default: true, hint: "Controls the contact form and contact-form-marked sections." }
+              - { label: "Show Online Payments", name: "showOnlinePayments", widget: "boolean", default: true, hint: "Controls online payment buttons and payments-marked sections." }
+              - { label: "Show Chat Widget", name: "showChatWidget", widget: "boolean", default: true, hint: "Controls the Tawk.to chat widget loading." }
+
+          - label: "Payments"
+            name: "payments"
+            widget: "object"
+            fields:
+              - { label: "Regular Fee Link", name: "regularFee", widget: "string" }
+              - { label: "Admission Fee Link", name: "admissionFee", widget: "string", required: false }
+              - { label: "Events Fee Link", name: "eventsFee", widget: "string", required: false }
+              - { label: "Uniforms/Books Link", name: "uniformsBooks", widget: "string", required: false }
+
+  - name: "news"
+    label: "News"
+    files:
+      - label: "News Items"
+        name: "news_items"
+        file: "news/content.json"
+        format: "json"
+        media_folder: "/news/media"
+        public_folder: "/news/media"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.date}} - {{fields.title}}"
+            fields:
+              - { label: "Date Time", name: "date", widget: "string", hint: "YYYY-MM-DD HH:mm" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Message", name: "message", widget: "text" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+
+  - name: "thought"
+    label: "Thought of the Day"
+    files:
+      - label: "Thought Entries"
+        name: "thought_entries"
+        file: "thought/content.json"
+        format: "json"
+        media_folder: "/thought/media"
+        public_folder: "/thought/media"
+        fields:
+          - label: "Entries"
+            name: "entries"
+            widget: "list"
+            summary: "{{fields.date}}"
+            fields:
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - label: "Daily Focus"
+                name: "daily_focus"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Media File (Image/Video)", name: "media_file", widget: "file", required: false, hint: "Upload an image or video from your device." }
+                  - { label: "Media URL (Repository path or public link)", name: "media_url", widget: "string", required: false, hint: "Examples: /thought/media/photo.jpg, /thought/media/video.mp4, or https://www.youtube.com/watch?v=..." }
+                  - { label: "Media Type", name: "media_type", widget: "select", required: false, default: "image", options: ["image", "video"], hint: "Choose video for MP4/WebM or YouTube links." }
+                  - { label: "Legacy Image", name: "image", widget: "image", required: false, hint: "Older field kept for backward compatibility." }
+                  - { label: "Alt", name: "alt", widget: "string", required: false }
+                  - { label: "Description", name: "description", widget: "text", required: false }
+                  - label: "Reflection Media Gallery"
+                    name: "media_items"
+                    widget: "list"
+                    required: false
+                    collapsed: true
+                    hint: "Add multiple images or videos for navigation in the Reflection section. Leave empty to use the single media above."
+                    fields:
+                      - { label: "Upload Media File", name: "media_file", widget: "file", required: false, hint: "Upload an image or video from your device." }
+                      - { label: "Or Add Media Link", name: "media_url", widget: "string", required: false, hint: "Paste image/video link or YouTube URL. Examples: /thought/media/photo.jpg, https://www.youtube.com/watch?v=..." }
+                      - { label: "Media Type", name: "media_type", widget: "select", required: false, default: "image", options: ["image", "video"], hint: "Choose video for MP4/WebM or YouTube links." }
+                      - { label: "Alt Text", name: "alt", widget: "string", required: false, hint: "Accessibility text for the image." }
+                      - { label: "Description", name: "description", widget: "text", required: false, hint: "Caption or description shown with the media." }
+                      - { label: "Timestamp", name: "timestamp", widget: "datetime", required: false, format: "YYYY-MM-DD HH:mm", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "When this media was posted. Defaults to entry date if left empty." }
+              - { label: "Thought", name: "thought_of_the_day", widget: "text", required: false }
+              - label: "Order of the Day"
+                name: "order_of_the_day"
+                widget: "list"
+                required: false
+                field: { label: "Item", name: "item", widget: "string" }
+              - { label: "Principal Message", name: "principal_message", widget: "text", required: false }
+              - { label: "Bible Verse", name: "bible_verse", widget: "text", required: false }
+              - { label: "Bible Reference", name: "bible_reference", widget: "string", required: false }
+              - { label: "Additional Notes", name: "additional_notes", widget: "text", required: false }
+
+  - name: "programs"
+    label: "Programs"
+    folder: "programs"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    path: "{{slug}}/content"
+    extension: "json"
+    format: "json"
+    identifier_field: "name"
+    media_folder: "programs/{{slug}}"
+    public_folder: "/programs/{{slug}}"
+    summary: "{{id}} - {{name}}"
+    fields:
+      - { label: "Program ID", name: "id", widget: "string", hint: "Use lowercase letters, numbers, underscore or hyphen." }
+      - { label: "Program Name", name: "name", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", required: true, hint: "Lower number appears first on home page." }
+      - label: "Card"
+        name: "card"
+        widget: "object"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Icon Color", name: "iconColor", widget: "string" }
+          - { label: "Icon Type", name: "iconType", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+      - label: "Page"
+        name: "page"
+        widget: "object"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - { label: "Badge", name: "badge", widget: "string", required: false }
+          - { label: "Tagline", name: "tagline", widget: "string", required: false }
+          - label: "Head Of Department"
+            name: "headOfDepartment"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Years Of Experience", name: "yearsOfExperience", widget: "string", required: false }
+              - { label: "Specialization", name: "specialization", widget: "string", required: false }
+          - label: "Qualifications"
+            name: "qualifications"
+            widget: "list"
+            required: false
+            field: { label: "Item", name: "item", widget: "string" }
+          - label: "Sub Programs"
+            name: "subPrograms"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Age Group", name: "ageGroup", widget: "string", required: false }
+              - { label: "Icon", name: "icon", widget: "string", required: false }
+              - { label: "Icon Background", name: "iconBg", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Curriculum"
+            name: "curriculum"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Intro", name: "intro", widget: "text", required: false }
+              - label: "Features"
+                name: "features"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+          - label: "Outcomes"
+            name: "outcomes"
+            widget: "list"
+            required: false
+            field: { label: "Item", name: "item", widget: "string" }
+          - { label: "CTA Heading", name: "ctaText", widget: "string", required: false }
+          - { label: "CTA Description", name: "ctaSubtext", widget: "text", required: false }
+          - label: "CTA Advanced"
+            name: "cta"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Button Text", name: "buttonText", widget: "string", required: false }
+              - { label: "Button Link", name: "buttonLink", widget: "string", required: false }
+
+  - name: "downloads"
+    label: "Downloads"
+    files:
+      - label: "Download Items"
+        name: "download_items"
+        file: "downloads/content.json"
+        format: "json"
+        media_folder: "/downloads/media"
+        public_folder: "/downloads/media"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.heading}}"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Audience", name: "audience", widget: "string" }
+              - { label: "Timestamp", name: "timestamp", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss[Z]", date_format: "YYYY-MM-DD", time_format: "HH:mm:ss" }
+              - { label: "PDF", name: "pdf_url", widget: "file" }
+
+  - name: "career"
+    label: "Career"
+    files:
+      - label: "Career Openings"
+        name: "career_openings"
+        file: "jobs/jobs.json"
+        format: "json"
+        fields:
+          - label: "Jobs"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.job_code}} - {{fields.title}}"
+            fields:
+              - { label: "Job Code", name: "job_code", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date Posted", name: "date_posted", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Deadline", name: "deadline", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "Active", value: "active" }
+                  - { label: "Inactive", value: "inactive" }
+                  - { label: "Closed", value: "closed" }
+              - { label: "Qualification", name: "qualification", widget: "string" }
+              - { label: "Experience", name: "experience", widget: "string" }
+              - { label: "Department", name: "department", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+  - name: "calendar"
+    label: "Academic Calendar"
+    files:
+      - label: "Calendar Entries"
+        name: "calendar_entries"
+        file: "calendar/content.json"
+        format: "json"
+        fields:
+          - label: "Entries"
+            name: "entries"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "School Event", value: "school_event" }
+                  - { label: "School Holiday", value: "school_holiday" }
+                  - { label: "State Holiday", value: "state_holiday" }
+                  - { label: "National Holiday", value: "national_holiday" }
+                  - { label: "Examination", value: "examination" }
+                  - { label: "Other Event", value: "other_event" }
+              - label: "Day Type"
+                name: "dayType"
+                widget: "select"
+                options:
+                  - { label: "Working Day", value: "working_day" }
+                  - { label: "Non Working Day", value: "non_working_day" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Single Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
+              - { label: "Start Date", name: "startDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
+              - { label: "End Date", name: "endDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
+
+  - name: "faculty"
+    label: "Faculty"
+    files:
+      - label: "Faculty Members"
+        name: "faculty_members"
+        file: "faculty/content.json"
+        format: "json"
+        media_folder: "/faculty/media"
+        public_folder: "/faculty/media"
+        fields:
+          - label: "Members"
+            name: "members"
+            widget: "list"
+            summary: "{{fields.name}} - {{fields.role}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Bio", name: "bio", widget: "text" }
+              - { label: "Qualifications", name: "qualifications", widget: "string" }
+              - { label: "Image", name: "img", widget: "image" }
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "Admin", value: "admin" }
+                  - { label: "Preprimary", value: "preprimary" }
+                  - { label: "Primary", value: "primary" }
+                  - { label: "Secondary", value: "secondary" }
+                  - { label: "Higher", value: "higher" }
+                  - { label: "Support", value: "support" }
+
+  - name: "gallery"
+    label: "Gallery"
+    files:
+      - label: "Gallery Images"
+        name: "gallery_images"
+        file: "gallery/content.json"
+        format: "json"
+        media_folder: "/gallery/media"
+        public_folder: "/gallery/media"
+        fields:
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            summary: "{{fields.date}} - {{fields.desc}}"
+            fields:
+              - { label: "Image", name: "url", widget: "image" }
+              - { label: "Description", name: "desc", widget: "text" }
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+
+  - name: "articles"
+    label: "Articles"
+    folder: "articles"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    path: "{{slug}}/content"
+    extension: "json"
+    format: "json"
+    identifier_field: "title"
+    media_folder: "articles/{{slug}}"
+    public_folder: "/articles/{{slug}}"
+    summary: "{{title}} - {{date}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Cover Image", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Author Image", name: "authorImage", widget: "image", required: false }
+      - { label: "Role", name: "role", widget: "string", required: false }
+      - { label: "Category", name: "category", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss", date_format: "YYYY-MM-DD", time_format: "HH:mm:ss" }
+      - { label: "Author Bio", name: "authorBio", widget: "text", required: false }
+      - { label: "Core Argument", name: "coreArgument", widget: "text", required: false }
+      - label: "Key Statistics"
+        name: "keyStatistics"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Value", name: "value", widget: "string" }
+      - label: "Content Blocks"
+        name: "content"
+        widget: "list"
+        fields:
+          - label: "Type"
+            name: "type"
+            widget: "select"
+            options:
+              - { label: "Paragraph", value: "paragraph" }
+              - { label: "Image", value: "image" }
+              - { label: "Pullquote", value: "pullquote" }
+          - { label: "Text", name: "text", widget: "text", required: false }
+          - { label: "Image", name: "src", widget: "image", required: false }
+          - { label: "Alt Text", name: "alt", widget: "string", required: false }
+  - name: "article_index"
+    label: "Articles Index"
+    files:
+      - label: "Articles Manifest"
+        name: "articles_manifest"
+        file: "articles/content.json"
+        format: "json"
+        fields:
+          - label: "Articles"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Folder name under articles/." }
+              - { label: "Title", name: "title", widget: "string" }
+              - label: "Date"
+                name: "date"
+                widget: "datetime"
+                format: "YYYY-MM-DDTHH:mm:ss"
+                date_format: "YYYY-MM-DD"
+                time_format: "HH:mm:ss"

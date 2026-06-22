@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; media-src 'self' https:; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com https://embed.tawk.to https://*.tawk.to https://unpkg.com; connect-src 'self' https://www.googletagmanager.com https://region1.google-analytics.com https://www.google-analytics.com https://embed.tawk.to https://*.tawk.to wss://*.tawk.to https://va.tawk.to https://api.github.com https://cusdis.com; frame-src 'self' https://*.tawk.to https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com/maps https://challenges.cloudflare.com https://cusdis.com; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
+    <title>Gallery | LEADS Higher Secondary School</title>
+    <link rel="icon" type="image/jpeg" href="school-logo.jpg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#1E3A8A">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+
+        /* Custom Mobile Menu Fix */
+        @media (max-width: 1023px) {
+            #mobile-menu.active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid #f1f5f9;
+                z-index: 100;
+            }
+        }
+
+        /* Masonry Layout */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 768px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Lightbox Styling */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        #lightbox img {
+            max-width: 95%;
+            max-height: 85vh;
+            border-radius: 0.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+            transition: transform 0.25s ease;
+        }
+
+        .lightbox-control {
+            position: absolute;
+            top: 50%;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.45);
+            color: #fff;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: background 0.2s ease, transform 0.2s ease;
+            z-index: 2010;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .lightbox-control:hover {
+            background: rgba(16, 185, 129, 0.9);
+            transform: translateY(-50%) scale(1.06);
+        }
+
+        #lightbox-prev { left: 1.25rem; }
+        #lightbox-next { right: 1.25rem; }
+        @media (max-width: 640px) {
+            #lightbox { padding: 1rem; }
+            .lightbox-control {
+                width: 3rem;
+                height: 3rem;
+                background: rgba(0, 0, 0, 0.65);
+            }
+            #lightbox-prev { left: 0.75rem; }
+            #lightbox-next { right: 0.75rem; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <div class="bg-emerald-700 text-white py-2 text-xs md:text-sm">
+        <div class="container mx-auto flex justify-between px-4">
+            
+            <div class="flex space-x-4">
+                <a id="global-link-phone-1" href="#" class="hover:text-emerald-200 transition-colors flex items-center cursor-pointer">
+                    <i class="fas fa-phone mr-1"></i> <span id="global-phone-1"></span>
+                </a>
+                <a id="global-link-email-general" href="#" class="hidden sm:flex items-center hover:text-emerald-200 transition-colors cursor-pointer">
+                    <i class="fas fa-envelope mr-1"></i> <span id="global-email-general"></span>
+                </a>
+            </div>
+            
+            <a id="global-link-maps" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-200 transition-colors flex items-center cursor-pointer">
+                <i class="fas fa-map-marker-alt mr-1"></i> <span id="global-address-street"></span>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50 min-h-[90px] md:min-h-[110px] flex items-center">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center w-full relative">
+            
+            <a href="index.html" class="flex items-center gap-3 md:gap-4 group shrink min-w-0">
+                <img src="school-logo.jpg" alt="LEADS Logo" class="h-16 md:h-20 w-auto object-contain flex-shrink-0 transition-transform group-hover:scale-105 duration-300"> 
+                
+                <div class="flex flex-col justify-center border-l-2 border-gray-100 pl-3 md:pl-4 min-w-0">
+                    <span id="global-school-shortname" class="block text-xl md:text-3xl font-black text-blue-900 leading-none uppercase tracking-tighter truncate">LEADS</span>
+                    <span class="text-[9px] md:text-sm font-bold text-emerald-600 tracking-wider md:tracking-[0.15em] uppercase mt-1 truncate">Higher Secondary School</span>
+                </div>
+            </a>
+
+            <ul id="mobile-menu" class="hidden lg:flex items-center space-x-8 font-extrabold text-gray-600 text-[13px] uppercase">
+                <li><a href="index.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Home</a></li>
+                <li><a href="faculty.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Faculty</a></li>
+                <li><a id="global-link-admissions-nav" data-feature="admissions" href="admissions.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Admissions</a></li>
+                <li><a href="insights.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Insights</a></li>
+                <li><a href="gallery.html" class="nav-link py-2 text-emerald-600 lg:underline lg:decoration-2 lg:underline-offset-8 transition-all">Gallery</a></li>
+                <li><a href="downloads.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Downloads</a></li>
+                <li><a href="career.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Career</a></li>
+                <li><a href="contact.html" class="nav-link py-2 hover:text-emerald-600 transition-all">Contact</a></li>
+                <li><a href="about.html" class="nav-link py-2 hover:text-emerald-600 transition-all">About Us</a></li>
+                <li class="mt-2 lg:mt-0">
+                    <a id="global-payment-regular" data-feature="online-payments" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-full hover:bg-blue-900 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        <i class="fas fa-credit-card text-sm"></i>
+                        <span>Pay Fees</span>
+                    </a>
+                </li>
+            </ul>
+
+            <button id="menu-btn" class="lg:hidden text-blue-900 focus:outline-none p-2 flex-shrink-0 relative z-[70]">
+                <i class="fas fa-bars text-3xl" id="menu-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="bg-blue-900 py-16 text-center text-white">
+        <h1 class="text-4xl font-black uppercase tracking-tight">School <span class="text-emerald-400">Gallery</span></h1>
+        <p class="mt-2 text-gray-300">Capturing moments of excellence and joy.</p>
+    </header>
+
+    <main class="container mx-auto py-16 px-4">
+        <div id="gallery-container" class="masonry-grid">
+        </div>
+        <div class="text-center mt-10">
+            <button id="load-more-gallery" class="hidden bg-blue-900 text-white px-8 py-3 rounded-full font-bold hover:bg-emerald-600 transition-colors shadow-md">
+                More Pictures <i class="fas fa-chevron-down ml-2"></i>
+            </button>
+        </div>
+    </main>
+
+    <div id="lightbox" role="dialog" aria-modal="true">
+        <span class="absolute top-5 right-10 text-white text-5xl cursor-pointer hover:text-emerald-400 transition" onclick="closeLightbox()">&times;</span>
+        <button id="lightbox-prev" class="lightbox-control" type="button" aria-label="Previous image">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="lightbox-next" class="lightbox-control" type="button" aria-label="Next image">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Enlarged view">
+        <p id="lightbox-caption" class="absolute bottom-10 text-white text-sm md:text-lg font-medium bg-black/60 backdrop-blur-md px-6 py-2 rounded-full"></p>
+        <p class="absolute top-5 left-1/2 -translate-x-1/2 text-white text-xs md:text-sm bg-black/60 backdrop-blur-md px-4 py-2 rounded-full">
+            Use ← and → to navigate. Last image loops to first.
+        </p>
+    </div>
+
+    <footer class="bg-gray-100 pt-16 pb-8 border-t border-gray-200">
+        <div class="container mx-auto px-4 grid md:grid-cols-4 gap-12 text-sm text-gray-600">
+            <div class="col-span-1 md:col-span-2">
+                <h4 class="text-xl font-black text-blue-900 mb-6 uppercase"><span id="global-school-shortname-footer">LEADS</span> <span class="text-emerald-600">SCHOOL</span></h4>
+                <p class="mb-4"><span id="global-address-street-footer"></span>, <span id="global-address-city"></span></p>
+                <p id="global-tagline" class="italic text-xs"></p>
+                
+                <div class="mt-6 space-y-3 font-medium">
+                    <a id="global-link-phone-footer" href="#" class="flex items-center gap-3 hover:text-emerald-600 transition-colors w-fit">
+                        <i class="fas fa-phone text-emerald-600"></i> <span id="global-phone-1-footer"></span>
+                    </a>
+                    <a id="global-link-email-footer" href="#" class="flex items-center gap-3 hover:text-emerald-600 transition-colors w-fit">
+                        <i class="fas fa-envelope text-emerald-600"></i> <span id="global-email-general-footer"></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h5 class="font-bold text-blue-900 mb-6 uppercase text-xs tracking-widest">Navigation</h5>
+                <ul class="space-y-3">
+                    <li><a id="global-link-admissions-footer" data-feature="admissions" href="admissions.html" class="hover:text-emerald-600 transition">Admissions</a></li>
+                    <li><a href="insights.html" class="hover:text-emerald-600 transition">Insights</a></li>
+                    <li><a href="downloads.html" class="hover:text-emerald-600 transition">Downloads</a></li>
+                    <li><a href="career.html" class="hover:text-emerald-600 transition">Career</a></li>
+                    <li><a href="about.html" class="hover:text-emerald-600 transition">About Us</a></li>
+                    <li><a href="terms.html" class="hover:text-emerald-600 transition font-bold">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="font-bold text-blue-900 mb-6 uppercase text-xs tracking-widest">Connect</h5>
+                <div class="flex space-x-4 text-xl">
+                    <a id="global-link-fb" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600"><i class="fab fa-facebook"></i></a>
+                    <a id="global-link-ig" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600"><i class="fab fa-instagram"></i></a>
+                    <a id="global-link-yt" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-16 pt-8 border-t border-gray-200 text-gray-400 text-xs">
+            <p id="global-copyright"></p>
+            <div class="mt-2">
+                <a href="terms.html" class="hover:text-emerald-600 transition underline decoration-dotted">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/pwa.js"></script>
+
+</body>
+</html>
